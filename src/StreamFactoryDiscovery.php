@@ -22,7 +22,7 @@ final class StreamFactoryDiscovery extends ClassDiscovery
     public static function find()
     {
         try {
-            $streamFactory = static::findOneByType(StreamFactory::class);
+            $streamFactory = static::findOneByType('Http\Message\StreamFactory');
         } catch (DiscoveryFailedException $e) {
             throw new NotFoundException(
                 'No stream factories found. To use Guzzle, Diactoros or Slim Framework factories install php-http/message and the chosen message implementation.',

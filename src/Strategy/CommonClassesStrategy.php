@@ -2,25 +2,6 @@
 
 namespace Http\Discovery\Strategy;
 
-use GuzzleHttp\Psr7\Request as GuzzleRequest;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
-use Http\Message\StreamFactory\GuzzleStreamFactory;
-use Http\Message\UriFactory\GuzzleUriFactory;
-use Http\Message\MessageFactory\DiactorosMessageFactory;
-use Http\Message\StreamFactory\DiactorosStreamFactory;
-use Http\Message\UriFactory\DiactorosUriFactory;
-use Zend\Diactoros\Request as DiactorosRequest;
-use Http\Message\MessageFactory\SlimMessageFactory;
-use Http\Message\StreamFactory\SlimStreamFactory;
-use Http\Message\UriFactory\SlimUriFactory;
-use Slim\Http\Request as SlimRequest;
-use Http\Adapter\Guzzle6\Client as Guzzle6;
-use Http\Adapter\Guzzle5\Client as Guzzle5;
-use Http\Client\Curl\Client as Curl;
-use Http\Client\Socket\Client as Socket;
-use Http\Adapter\React\Client as React;
-use Http\Adapter\Buzz\Client as Buzz;
-
 /**
  * @internal
  *
@@ -33,32 +14,32 @@ final class CommonClassesStrategy implements DiscoveryStrategy
      */
     private static $classes = [
         'Http\Message\MessageFactory' => [
-            ['class' => GuzzleMessageFactory::class, 'condition' => [GuzzleRequest::class, GuzzleMessageFactory::class]],
-            ['class' => DiactorosMessageFactory::class, 'condition' => [DiactorosRequest::class, DiactorosMessageFactory::class]],
-            ['class' => SlimMessageFactory::class, 'condition' => [SlimRequest::class, SlimMessageFactory::class]],
+            ['class' => 'Http\Message\MessageFactory\GuzzleMessageFactory', 'condition' => ['GuzzleHttp\Psr7\Request', 'Http\Message\MessageFactory\GuzzleMessageFactory']],
+            ['class' => 'Http\Message\MessageFactory\DiactorosMessageFactory', 'condition' => ['Zend\Diactoros\Request', 'Http\Message\MessageFactory\DiactorosMessageFactory']],
+            ['class' => 'Http\Message\MessageFactory\SlimMessageFactory', 'condition' => ['Slim\Http\Request', 'Http\Message\MessageFactory\SlimMessageFactory']],
         ],
         'Http\Message\StreamFactory' => [
-            ['class' => GuzzleStreamFactory::class, 'condition' => [GuzzleRequest::class, GuzzleStreamFactory::class]],
-            ['class' => DiactorosStreamFactory::class, 'condition' => [DiactorosRequest::class, DiactorosStreamFactory::class]],
-            ['class' => SlimStreamFactory::class, 'condition' => [SlimRequest::class, SlimStreamFactory::class]],
+            ['class' => 'Http\Message\StreamFactory\GuzzleStreamFactory', 'condition' => ['GuzzleHttp\Psr7\Request', 'Http\Message\StreamFactory\GuzzleStreamFactory']],
+            ['class' => 'Http\Message\StreamFactory\DiactorosStreamFactory', 'condition' => ['Zend\Diactoros\Request', 'Http\Message\StreamFactory\DiactorosStreamFactory']],
+            ['class' => 'Http\Message\StreamFactory\SlimStreamFactory', 'condition' => ['Slim\Http\Request', 'Http\Message\StreamFactory\SlimStreamFactory']],
         ],
         'Http\Message\UriFactory' => [
-            ['class' => GuzzleUriFactory::class, 'condition' => [GuzzleRequest::class, GuzzleUriFactory::class]],
-            ['class' => DiactorosUriFactory::class, 'condition' => [DiactorosRequest::class, DiactorosUriFactory::class]],
-            ['class' => SlimUriFactory::class, 'condition' => [SlimRequest::class, SlimUriFactory::class]],
+            ['class' => 'Http\Message\UriFactory\GuzzleUriFactory', 'condition' => ['GuzzleHttp\Psr7\Request', 'Http\Message\UriFactory\GuzzleUriFactory']],
+            ['class' => 'Http\Message\UriFactory\DiactorosUriFactory', 'condition' => ['Zend\Diactoros\Request', 'Http\Message\UriFactory\DiactorosUriFactory']],
+            ['class' => 'Http\Message\UriFactory\SlimUriFactory', 'condition' => ['Slim\Http\Request', 'Http\Message\UriFactory\SlimUriFactory']],
         ],
         'Http\Client\HttpAsyncClient' => [
-            ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
-            ['class' => Curl::class, 'condition' => Curl::class],
-            ['class' => React::class, 'condition' => React::class],
+            ['class' => 'Http\Adapter\Guzzle6\Client', 'condition' => 'Http\Adapter\Guzzle6\Client'],
+            ['class' => 'Http\Client\Curl\Client', 'condition' => 'Http\Client\Curl\Client'],
+            ['class' => 'Http\Adapter\React\Client', 'condition' => 'Http\Adapter\React\Client'],
         ],
         'Http\Client\HttpClient' => [
-            ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
-            ['class' => Guzzle5::class, 'condition' => Guzzle5::class],
-            ['class' => Curl::class, 'condition' => Curl::class],
-            ['class' => Socket::class, 'condition' => Socket::class],
-            ['class' => Buzz::class, 'condition' => Buzz::class],
-            ['class' => React::class, 'condition' => React::class],
+            ['class' => 'Http\Adapter\Guzzle6\Client', 'condition' => 'Http\Adapter\Guzzle6\Client'],
+            ['class' => 'Http\Adapter\Guzzle5\Client', 'condition' => 'Http\Adapter\Guzzle5\Client'],
+            ['class' => 'Http\Client\Curl\Client', 'condition' => 'Http\Client\Curl\Client'],
+            ['class' => 'Http\Client\Socket\Client', 'condition' => 'Http\Client\Socket\Client'],
+            ['class' => 'Http\Adapter\Buzz\Client', 'condition' => 'Http\Adapter\Buzz\Client'],
+            ['class' => 'Http\Adapter\React\Client', 'condition' => 'Http\Adapter\React\Client'],
         ],
     ];
 

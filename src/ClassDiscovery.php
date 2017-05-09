@@ -21,8 +21,8 @@ abstract class ClassDiscovery
      * @var array
      */
     private static $strategies = [
-        Strategy\PuliBetaStrategy::class,
-        Strategy\CommonClassesStrategy::class,
+        'Http\Discovery\Strategy\PuliBetaStrategy',
+        'Http\Discovery\Strategy\CommonClassesStrategy',
     ];
 
     /**
