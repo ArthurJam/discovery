@@ -1,4 +1,4 @@
-# HTTPlug Discovery
+# HTTPlug Discovery PHP 5.4 compatible
 
 [![Latest Version](https://img.shields.io/github/release/php-http/discovery.svg?style=flat-square)](https://github.com/php-http/discovery/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
