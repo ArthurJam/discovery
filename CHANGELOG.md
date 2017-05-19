@@ -1,11 +1,16 @@
 # Change Log
 
+## 1.2.2 - 2017-05-19
+
+### Changed
+
+- Dropping ::class constant to support back PHP 5.4.
 
 ## 1.2.1 - 2017-03-02
 
 ### Fixed
 
-- Fixed minor issue with `MockClientStrategy`, also added more tests. 
+- Fixed minor issue with `MockClientStrategy`, also added more tests.
 
 ## 1.2.0 - 2017-02-12
 

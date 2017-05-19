@@ -17,7 +17,7 @@ class StreamFactoryDiscoverySpec extends ObjectBehavior
 {
     function let()
     {
-        ClassDiscovery::setStrategies([DiscoveryHelper::class]);
+        ClassDiscovery::setStrategies(['spec\Http\Discovery\Helper\DiscoveryHelper']);
         DiscoveryHelper::clearClasses();
     }
 
@@ -34,7 +34,7 @@ class StreamFactoryDiscoverySpec extends ObjectBehavior
     function it_finds_a_stream_factory(DiscoveryStrategy $strategy) {
 
         $candidate = ['class' => 'spec\Http\Discovery\Stub\StreamFactoryStub', 'condition' => true];
-        DiscoveryHelper::setClasses(StreamFactory::class, [$candidate]);
+        DiscoveryHelper::setClasses('Http\Message\StreamFactory', [$candidate]);
 
         $this->find()->shouldImplement('Http\Message\StreamFactory');
     }
@@ -42,6 +42,6 @@ class StreamFactoryDiscoverySpec extends ObjectBehavior
     function it_throw_exception(DiscoveryStrategy $strategy) {
         $strategy->getCandidates('Http\Message\StreamFactory')->willReturn([]);
 
-        $this->shouldThrow(NotFoundException::class)->duringFind();
+        $this->shouldThrow('Http\Discovery\NotFoundException')->duringFind();
     }
 }

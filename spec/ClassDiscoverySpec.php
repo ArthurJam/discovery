@@ -17,7 +17,7 @@ use spec\Http\Discovery\Helper\SuccessfullDiscoveryStrategy;
 class ClassDiscoverySpec extends ObjectBehavior
 {
     function let() {
-        ClassDiscovery::setStrategies([DiscoveryHelper::class]);
+        ClassDiscovery::setStrategies(['spec\Http\Discovery\Helper\DiscoveryHelper']);
         DiscoveryHelper::clearClasses();
         $this->beAnInstanceOf('spec\Http\Discovery\ClassDiscoveryStub');
     }
@@ -31,7 +31,7 @@ class ClassDiscoverySpec extends ObjectBehavior
     {
         $strategy->getCandidates('NoCandidate')->willReturn([]);
 
-        $this->shouldThrow(DiscoveryFailedException::class)->duringFind('NoCandidate');
+        $this->shouldThrow('Http\Discovery\Exception\DiscoveryFailedException')->duringFind('NoCandidate');
     }
 
     function it_returns_a_class()
@@ -55,8 +55,8 @@ class ClassDiscoverySpec extends ObjectBehavior
         $candidate = ['class' => 'Added'];
         DiscoveryHelper::setClasses('Foobar', [$candidate]);
 
-        ClassDiscovery::setStrategies([SuccessfullDiscoveryStrategy::class]);
-        ClassDiscovery::prependStrategy(DiscoveryHelper::class);
+        ClassDiscovery::setStrategies(['spec\Http\Discovery\Helper\SuccessfullDiscoveryStrategy']);
+        ClassDiscovery::prependStrategy('spec\Http\Discovery\Helper\DiscoveryHelper');
 
         $this->find('Foobar')->shouldReturn('Added');
     }
@@ -66,14 +66,14 @@ class ClassDiscoverySpec extends ObjectBehavior
         DiscoveryHelper::setClasses('Foobar', [$candidate]);
 
         // Make sure our strategy is added to the list
-        ClassDiscovery::setStrategies([FailedDiscoveryStrategy::class]);
-        ClassDiscovery::appendStrategy(DiscoveryHelper::class);
+        ClassDiscovery::setStrategies(['spec\Http\Discovery\Helper\FailedDiscoveryStrategy']);
+        ClassDiscovery::appendStrategy('spec\Http\Discovery\Helper\DiscoveryHelper');
 
         $this->find('Foobar')->shouldReturn('Added');
 
         // Make sure it is added last in the list
-        ClassDiscovery::setStrategies([SuccessfullDiscoveryStrategy::class]);
-        ClassDiscovery::appendStrategy(DiscoveryHelper::class);
+        ClassDiscovery::setStrategies(['spec\Http\Discovery\Helper\SuccessfullDiscoveryStrategy']);
+        ClassDiscovery::appendStrategy('spec\Http\Discovery\Helper\DiscoveryHelper');
 
         $this->find('Foobar')->shouldReturn('Success');
     }

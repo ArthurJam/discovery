@@ -17,7 +17,7 @@ class HttpClientDiscoverySpec extends ObjectBehavior
 {
     function let()
     {
-        ClassDiscovery::setStrategies([DiscoveryHelper::class]);
+        ClassDiscovery::setStrategies(['spec\Http\Discovery\Helper\DiscoveryHelper']);
         DiscoveryHelper::clearClasses();
     }
 
@@ -34,12 +34,12 @@ class HttpClientDiscoverySpec extends ObjectBehavior
     function it_finds_a_http_client(DiscoveryStrategy $strategy) {
 
         $candidate = ['class' => 'spec\Http\Discovery\Stub\HttpClientStub', 'condition' => true];
-        DiscoveryHelper::setClasses(HttpClient::class, [$candidate]);
+        DiscoveryHelper::setClasses('Http\Client\HttpClient', [$candidate]);
 
         $this->find()->shouldImplement('Http\Client\HttpClient');
     }
 
     function it_throw_exception(DiscoveryStrategy $strategy) {
-        $this->shouldThrow(NotFoundException::class)->duringFind();
+        $this->shouldThrow('Http\Discovery\NotFoundException')->duringFind();
     }
 }

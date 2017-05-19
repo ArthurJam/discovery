@@ -17,7 +17,7 @@ class UriFactoryDiscoverySpec extends ObjectBehavior
 {
     function let()
     {
-        ClassDiscovery::setStrategies([DiscoveryHelper::class]);
+        ClassDiscovery::setStrategies(['spec\Http\Discovery\Helper\DiscoveryHelper']);
         DiscoveryHelper::clearClasses();
     }
 
@@ -34,7 +34,7 @@ class UriFactoryDiscoverySpec extends ObjectBehavior
     function it_finds_a_uri_factory(DiscoveryStrategy $strategy) {
 
         $candidate = ['class' => 'spec\Http\Discovery\Stub\UriFactoryStub', 'condition' => true];
-        DiscoveryHelper::setClasses(UriFactory::class, [$candidate]);
+        DiscoveryHelper::setClasses('Http\Message\UriFactory', [$candidate]);
 
         $this->find()->shouldImplement('Http\Message\UriFactory');
     }
@@ -42,6 +42,6 @@ class UriFactoryDiscoverySpec extends ObjectBehavior
     function it_throw_exception(DiscoveryStrategy $strategy) {
         $strategy->getCandidates('Http\Message\UriFactory')->willReturn([]);
 
-        $this->shouldThrow(NotFoundException::class)->duringFind();
+        $this->shouldThrow('Http\Discovery\NotFoundException')->duringFind();
     }
 }

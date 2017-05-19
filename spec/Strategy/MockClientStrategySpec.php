@@ -13,12 +13,12 @@ class MockClientStrategySpec extends ObjectBehavior
 {
     function let()
     {
-        ClassDiscovery::setStrategies([Strategy\MockClientStrategy::class]);
+        ClassDiscovery::setStrategies(['Http\Discovery\Strategy\MockClientStrategy']);
     }
 
     function it_should_return_the_mock_client(DiscoveryStrategy $strategy)
     {
-        $candidates = $this->getCandidates(HttpClient::class);
+        $candidates = $this->getCandidates('Http\Client\HttpClient');
         $candidates->shouldBeArray();
         $candidates->shouldHaveCount(1);
     }

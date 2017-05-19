@@ -18,7 +18,7 @@ class HttpAsyncClientDiscoverySpec extends ObjectBehavior
 {
     function let()
     {
-        ClassDiscovery::setStrategies([DiscoveryHelper::class]);
+        ClassDiscovery::setStrategies(['spec\Http\Discovery\Helper\DiscoveryHelper']);
         DiscoveryHelper::clearClasses();
     }
 
@@ -35,12 +35,12 @@ class HttpAsyncClientDiscoverySpec extends ObjectBehavior
     function it_finds_an_async_http_client(DiscoveryStrategy $strategy) {
 
         $candidate = ['class' => 'spec\Http\Discovery\Stub\HttpAsyncClientStub', 'condition' => true];
-        DiscoveryHelper::setClasses(HttpAsyncClient::class, [$candidate]);
+        DiscoveryHelper::setClasses('Http\Client\HttpAsyncClient', [$candidate]);
 
         $this->find()->shouldImplement('Http\Client\HttpAsyncClient');
     }
 
     function it_throw_exception(DiscoveryStrategy $strategy) {
-        $this->shouldThrow(NotFoundException::class)->duringFind();
+        $this->shouldThrow('Http\Discovery\NotFoundException')->duringFind();
     }
 }

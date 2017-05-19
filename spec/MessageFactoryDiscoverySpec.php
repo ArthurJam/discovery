@@ -17,7 +17,7 @@ class MessageFactoryDiscoverySpec extends ObjectBehavior
 {
     function let()
     {
-        ClassDiscovery::setStrategies([DiscoveryHelper::class]);
+        ClassDiscovery::setStrategies(['spec\Http\Discovery\Helper\DiscoveryHelper']);
         DiscoveryHelper::clearClasses();
     }
 
@@ -34,7 +34,7 @@ class MessageFactoryDiscoverySpec extends ObjectBehavior
     function it_finds_a_message_factory(DiscoveryStrategy $strategy) {
 
         $candidate = ['class' => 'spec\Http\Discovery\Stub\MessageFactoryStub', 'condition' => true];
-        DiscoveryHelper::setClasses(MessageFactory::class, [$candidate]);
+        DiscoveryHelper::setClasses('Http\Message\MessageFactory', [$candidate]);
 
         $this->find()->shouldImplement('Http\Message\MessageFactory');
     }
@@ -42,6 +42,6 @@ class MessageFactoryDiscoverySpec extends ObjectBehavior
     function it_throw_exception(DiscoveryStrategy $strategy) {
         $strategy->getCandidates('Http\Message\MessageFactory')->willReturn([]);
 
-        $this->shouldThrow(NotFoundException::class)->duringFind();
+        $this->shouldThrow('Http\Discovery\NotFoundException')->duringFind();
     }
 }

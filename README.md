@@ -1,11 +1,8 @@
 # HTTPlug Discovery PHP 5.4 compatible
 
-[![Latest Version](https://img.shields.io/github/release/php-http/discovery.svg?style=flat-square)](https://github.com/php-http/discovery/releases)
+[![Latest Version](https://img.shields.io/github/release/ArthurJam/discovery.svg?style=flat-square)](https://github.com/ArthurJam/discovery/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Build Status](https://img.shields.io/travis/php-http/discovery.svg?style=flat-square)](https://travis-ci.org/php-http/discovery)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/php-http/discovery.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/discovery)
-[![Quality Score](https://img.shields.io/scrutinizer/g/php-http/discovery.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/discovery)
-[![Total Downloads](https://img.shields.io/packagist/dt/php-http/discovery.svg?style=flat-square)](https://packagist.org/packages/php-http/discovery)
+[![Build Status](https://img.shields.io/travis/ArthurJam/discovery.svg?style=flat-square)](https://travis-ci.org/ArthurJam/discovery)
 
 **Finds installed HTTPlug implementations and PSR-7 message factories.**
 
